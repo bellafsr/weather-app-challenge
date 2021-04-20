@@ -1,8 +1,9 @@
-import { StatusBar } from 'react-native';
+import { View, Text } from "react-native";
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider as StoreProvider } from 'react-redux';
 import { Provider as PaperProvider } from 'react-native-paper';
+import Constants from 'expo-constants';
 
 import useCachedResources from './hooks/useCachedResources';
 import HomeComponent from './screens/HomeComponent.component';
@@ -19,7 +20,24 @@ export default function App() {
 		<StoreProvider store={store}>
 			<SafeAreaProvider>
 				<PaperProvider>
-					<HomeComponent />
+					{	
+						() => {
+							if (!Constants.isDevice) {
+								return (
+									<View style={{height: '100%', alignItems: 'center', justifyContent: 'center', paddingHorizontal: 30}}>
+										<Text>
+											Oops, this will not work on Snack in
+											an Android/Iphone emulator. Try it on your
+											device!
+										</Text>
+									</View>
+								);
+							}
+							return (
+								<HomeComponent />
+							)
+						}
+					}
 				</PaperProvider>
 			</SafeAreaProvider>
 		</StoreProvider>

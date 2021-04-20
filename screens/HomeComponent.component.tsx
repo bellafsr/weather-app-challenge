@@ -63,7 +63,7 @@ class HomeComponent extends Component<IComponentProps> {
 	public styles = StyleSheet.create({
 		Container: {
 			height: "100%",
-			padding: 30,
+			padding: 20,
 		},
 	});
 }
